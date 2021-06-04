@@ -11,22 +11,14 @@
 
 <script>
 export default {
-  data () {
+  async asyncData ({ $axios }) {
+
+    let response = await $axios.get('/videos')
+
+    let videos = response.data
+
     return {
-      videos: [
-        {
-          id: "1",
-          name: "one"
-        },
-        {
-          id: "2",
-          name: "two"
-        },
-        {
-          id: "3",
-          name: "three"
-        }
-      ]
+      videos
     }
   }
 }

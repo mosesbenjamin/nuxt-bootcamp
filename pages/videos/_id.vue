@@ -6,29 +6,17 @@
 
 <script>
 export default {
-  data () {
+  async asyncData ({$axios, params}) {
+    let response = await $axios.get(`/videos`)
+    let videos = response.data
+
+    let video = videos.filter(v => v.id == params.id)
+
     return {
-      videos: [
-        {
-          id: "1",
-          name: "one"
-        },
-        {
-          id: "2",
-          name: "two"
-        },
-        {
-          id: "3",
-          name: "three"
-        }
-      ]
+      video: video[0]
     }
   },
-  computed: {
-    video () {
-      return this.videos.find( v => v.id == this.$route.params.id)
-    }
-  }
+
 }
 </script>
 
