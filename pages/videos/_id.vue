@@ -6,6 +6,12 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: '',
+      titleTemplate: `%s ${this.video.name} - Video Screencasts`
+    }
+  },
   async asyncData ({$axios, params}) {
     let response = await $axios.get(`/videos`)
     let videos = response.data

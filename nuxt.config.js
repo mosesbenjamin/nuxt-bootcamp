@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "vue-screencast",
+    title: "Vue Screencasts -Learning Vuejs",
     htmlAttrs: {
       lang: "en"
     },
