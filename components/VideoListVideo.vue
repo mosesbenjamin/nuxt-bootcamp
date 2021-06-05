@@ -2,6 +2,7 @@
   <v-card width="340px"
           hover
           class="ma-2"
+          :to="`/watch/${video.id}`"
           >
           <!-- :to="{ name: 'video-watch', params: { id: video.id }}" -->
     <v-img :src="video.thumbnail" />
