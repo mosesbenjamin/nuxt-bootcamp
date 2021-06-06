@@ -39,32 +39,25 @@
 <script>
 import 'video.js/dist/video-js.css'
 import Vue from 'vue';
+import { mapState } from 'vuex'
 
 if (process.browser) {
   const VueVideoPlayer = require('vue-video-player/dist/ssr')
   Vue.use(VueVideoPlayer)
 }
 export default {
-   async asyncData ({ $axios, params }) {
-     let response = await $axios.get(`/videos/${params.id}`)
-     let video = response.data
-
-     video.tag_ids = video.tags.map(t => t.id)
-     let tags = video.tags
-    return {
-      video,
-      tags
-    }
+  async fetch ({ store, params }) {
+     await store.dispatch('loadVideo', {videoId: params.id})
   },
    computed: {
     // ...mapGetters({
     //   getTag: 'tags/get',
     //   isPlayed: 'users/videoIsPlayed'
     // }),
-    // ...mapState({
-    //   videos: state => state.videos.videos,
-    //   currentUser: state => state.users.currentUser
-    // }),
+    ...mapState(['videos', 'tags']),
+    video () {
+      return this.videos.find(v => v.id == this.$route.params.id)
+    },
     playerOptions(){
       return {
         language: 'en',
